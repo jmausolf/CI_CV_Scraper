@@ -1,6 +1,10 @@
-
-
-
+##################################
+###                            ###
+###      Joshua G. Mausolf     ###
+###    Computation Institute   ###
+###    University of Chicago   ###
+###                            ###
+##################################
 
 
 def name_filter():
