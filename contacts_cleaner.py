@@ -126,7 +126,12 @@ df_split("../IW_DATA.csv")
 
 
 def transpose_delimiter(df):
-
+	"""To get each block of rows as a single line, 
+	this function first transposes the df, saves it,
+	then imports the df using a delimiter inputed during the
+	initial data cleaning. Lastly, it transposes the df back
+	to the original form."""
+	
 	#Set Infile/Outfile Names
 	infile_1st = "../"+str(df)+".csv"
 	outfile_1st = "../pandas_"+str(df)+".csv"
@@ -154,6 +159,8 @@ def transpose_delimiter(df):
 
 # Run Transpose Delimiter For All Sub-DF's
 def gen_names_per_row():
+	"""This function runs the transpose_delimiter function
+	for the list of created df splits."""
 	
 	dfs = ['df1', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9']
 	for df in dfs:
@@ -165,8 +172,6 @@ gen_names_per_row()
 
 
 def merge_files():
-	#path = "../NPR"
-	#dfs = glob.glob("../NPR")
 	allFiles = ["../NPR_df1.csv", "../NPR_df2.csv", "../NPR_df3.csv", "../NPR_df4.csv", "../NPR_df5.csv", "../NPR_df6.csv", "../NPR_df7.csv", "../NPR_df8.csv", "../NPR_df9.csv"]
 
 	frame = pd.DataFrame()
