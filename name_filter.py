@@ -9,7 +9,8 @@
 
 def name_filter():
 	import csv 
-	with open('../Cleaned_One_Name_Per_Row.csv', 'rU') as f:
+	#with open('../Cleaned_One_Name_Per_Row.csv', 'rU') as f:
+	with open('../MERGED_NPR_Cleaned.csv', 'rU') as f:
 		for row in csv.reader(f):
 
 			#Filter Professors

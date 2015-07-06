@@ -56,14 +56,12 @@ def clean_contacts2(infile):
 
 	infile = open(CSV, 'rU')
 	outfile = open('../cleaned_contacts2_new.csv', 'w')
-	#outfile = open('../CLEAN_DATA.csv', 'w')	
 
 	reader = csv.reader(infile)
 	writer = csv.writer(outfile)
 
 	for line in reader:
 			line0 = str(line)
-			#print line0
 			line1 = line0.replace("[',", "*break*").replace('[]', '').replace("['", '').replace("']", '').replace(',', '').replace(' -', '')
 			# For whichever reason text such as "\x0c" would not replace. These were resolved using Excel's find and replace feature. This was done following the work done in this function.
 			#print line1
@@ -108,18 +106,6 @@ def df_split(infile):
 
 	#Define Data (Full Cleaned Data)
 	df = pd.read_csv(infile, index_col=0, header=None)
-
-	
-	"""
-	#df1, df2 = df[:1000, :], df[1000:2000, :]
-	#Was working with cleaned_data2.csv
-	df1, df2 = df[0:10001], df[10001:20000]
-	df3, df4 = df[20000:29998], df[29998:39998]
-	df5, df6 = df[39998:49998], df[50000-1:60000-1]
-	df7, df8 = df[60000-1:70000-1], df[70000-1:80000-1]
-	df9, df10 = df[80000-1:90000-1], df[90000-1:]
-	"""
-
 	
 	df1, df2 = df[0:9996], df[9996:19999]
 	df3, df4 = df[19999:29994], df[29994:39992]
@@ -127,10 +113,7 @@ def df_split(infile):
 	df7, df8 = df[59999:69998], df[69998:79994]
 	df9 = df[79994:90000]
 	
-
-
 	dfs_names = ['df1', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9', 'df10']
-	dfs = [df1, df2, df3, df4]
 
 
 	#Generate Commands
@@ -164,9 +147,13 @@ df_split("../IW_DATA.csv")
 #
 
 
-def clean_contacts3(infile):
+def clean_contacts3(df):
 	"""This function takes a CSV of existing scholars CSV text files and department
 	and converts it to a cleaned CSV of departments and scholar names."""
+
+	#Set Infile/Outfile Names
+	infile = "../"+str(df)+".csv"
+	outfile = "../pandas_"+str(df)+".csv"
 
 	#Define Data
 	data = pd.read_csv(infile, index_col=0, header=None)
@@ -174,16 +161,17 @@ def clean_contacts3(infile):
 	#outfile = open('../cleaned_contacts.csv', 'w')
 
 	transdf = data.transpose()
-	#print transdf
 
 	#Used originally
 	#transdf.to_csv("../pandas_clean_new.csv", encoding='utf-8')
-	transdf.to_csv("../pandas_df1.csv", encoding='utf-8')
+	#transdf.to_csv("../pandas_df1.csv", encoding='utf-8')
+	transdf.to_csv(outfile, encoding='utf-8')
 
 
 #clean_contacts3("../cleaned_contacts2-head_new.csv")
-clean_contacts3("../df1.csv")
+#clean_contacts3("../df1.csv")
 
+##clean_contacts3("df1")
 
 
 def convert_trans_df(infile):
@@ -203,11 +191,91 @@ def convert_trans_df(infile):
 
 
 #convert_trans_df("../pandas_clean_new.csv")
-convert_trans_df("../pandas_df1.csv")
+##convert_trans_df("../pandas_df1.csv")
 
 ##So even this way, I seem to be getting about 1/5 of the rows. There should be 10,000 not 2,000 or 1,000.
 
 ## I might have to break up the CSV prior to the transpose into say 5-10 smaller spreadsheets.
 ## 
 
+def transpose_delimiter(df):
+
+	#Set Infile/Outfile Names
+	infile_1st = "../"+str(df)+".csv"
+	outfile_1st = "../pandas_"+str(df)+".csv"
+
+	infile_2nd = outfile_1st
+	#outfile_2nd = "../pandas_"+str(df)+"_One_Name_Per_Row.csv"
+	outfile_2nd = "../NPR_"+str(df)+".csv"
+
+	###_____ First Step ____ ###
+
+	#Define Data
+	data = pd.read_csv(infile_1st, index_col=0, header=None)
+
+	#First Transpose and Save
+	transdf = data.transpose()
+	transdf.to_csv(outfile_1st, encoding='utf-8')
+
+	###_____ Second Step ____ ###
+
+	#Import Transposed Data and Use Deliter to Split
+	data = pd.read_csv(infile_2nd, delimiter='|')
+	transdf = data.transpose()
+	transdf.to_csv(outfile_2nd, encoding='utf-8')
+
+
+#transpose_delimiter("df2")
+
+# Run Transpose Delimiter For All Sub-DF's
+
+def gen_names_per_row():
+	
+	dfs = ['df1', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9']
+	for df in dfs:
+		print "Writing names for "+df+"..."
+		transpose_delimiter(df)
+
+gen_names_per_row()
+
+def merge_files():
+	#path = "../NPR"
+	#dfs = glob.glob("../NPR")
+	allFiles = ["../NPR_df1.csv", "../NPR_df2.csv", "../NPR_df3.csv", "../NPR_df4.csv", "../NPR_df5.csv", "../NPR_df6.csv", "../NPR_df7.csv", "../NPR_df8.csv", "../NPR_df9.csv"]
+
+	frame = pd.DataFrame()
+	list_ = []
+	for file_ in allFiles:
+	    df = pd.read_csv(file_,index_col=0, header=None)
+	    list_.append(df)
+	frame = pd.concat(list_)
+	print "Writing merged file..."
+	frame.to_csv("../MERGED_NPR.csv", encoding='utf-8')
+
+
+merge_files()
+
+
+
+def post_merge_clean(file_):
+	"""This function cleans the merged names per row list
+	to make searching in the name filter produce cleaner data."""
+
+	filename = "../"+file_+".csv"
+	infile = open(filename, 'rU')
+	outfile = open("../"+file_+"_Cleaned.csv", 'w')	
+
+	reader = csv.reader(infile)
+	writer = csv.writer(outfile)
+
+	print "Cleaning merged file..."
+	for line in reader:
+			line0 = str(line)
+			line1 = line0.replace(',', ' ').replace(';', ' ').replace("['", '').replace("']", '')
+			writer.writerow([line1])
+
+	infile.close()
+	outfile.close()
+
+post_merge_clean("MERGED_NPR")
 
