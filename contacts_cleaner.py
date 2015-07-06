@@ -7,55 +7,39 @@
 ##################################
 
 
-import csv
+import csv, sys, os
 import pandas as pd 
 
-import sys, os
-import csv
-import pandas as pd 
 
-# Set File Name
-Text_File = "../iw.txt"
-File = str(Text_File)
-
-def clean_contacts(infile):
+def clean_contacts1(File):
 	"""This function takes a text file of raw existing faculty and staff and cleans
 	the data to searchable entries."""
 
 	infile = open(File, 'rU')
-	#outfile = open('../cleaned_contacts.csv', 'w')
-	#outfile = open('../CLEAN_DATA.csv', 'w')
+	outfile = open('../iw.csv', 'w')
 
 	reader = infile.read()
-	#reader = csv.reader(infile, delimiter=',')
-	writer = csv.writer(outfile, delimiter='*')
+	writer = csv.writer(outfile, delimiter=',')
 
 	for line in reader:
-			#print line
 			line0 = str(line)
 			line1 = line0.replace('\n', ' ').replace('\r', ' ')
-			#print line1
-			#line2 = line1.replace('[', '').replace(']', '').replace("'", '')
-			#print line2
 			writer.writerow([line1])
 
 	infile.close()
 	outfile.close()
 
-#clean_contacts(File)
-#clean_contacts("../CLEAN_CONTACTS.txt")
+#Unhash to run
+#clean_contacts1("../iw.txt")
 
 
-# Set CSV File Name
-CSV_File = "../iw.csv"
-CSV = str(CSV_File)
 
 def clean_contacts2(infile):
 	"""This function takes a CSV of existing scholars CSV text files and department
 	and converts it to a cleaned CSV of departments and scholar names."""
 
 	infile = open(CSV, 'rU')
-	outfile = open('../cleaned_contacts2_new.csv', 'w')
+	outfile = open('../cleaned_contacts2.csv', 'w')
 
 	reader = csv.reader(infile)
 	writer = csv.writer(outfile)
@@ -63,8 +47,6 @@ def clean_contacts2(infile):
 	for line in reader:
 			line0 = str(line)
 			line1 = line0.replace("[',", "*break*").replace('[]', '').replace("['", '').replace("']", '').replace(',', '').replace(' -', '')
-			# For whichever reason text such as "\x0c" would not replace. These were resolved using Excel's find and replace feature. This was done following the work done in this function.
-			#print line1
 			line2 = line1.replace('\n', '').replace('\r', '').replace('\n\r', '').replace("*break*", '|')
 			print line2
 			writer.writerow([line2])
@@ -72,10 +54,11 @@ def clean_contacts2(infile):
 	infile.close()
 	outfile.close()
 
-#clean_contacts2(CSV)
-#clean_contacts2("../CLEAN_CONTACTS.txt")
+#Unhash to run
+#clean_contacts2("../iw.csv")
 
 
+### ______________ ***** NOTE BENE *****  ___________________ ###
 
 # For whichever reason text such as "\x0c" would not replace. These were resolved using Excel's find and replace feature. This was done following the work done in this function.
 # Using excel, I replaced:
@@ -97,8 +80,9 @@ def clean_contacts2(infile):
 # "\x9f" with "u"
 # "\x96" with "n"
 # "\x89" with "a"
-# "," with ";"
+# "," with ";" #(Done to prevent automatic conversion of the ',' into different columns in sublime text 2)
 
+# Afterward, the data was copied to clipboard, pasted to a sublime text document and saved as a CSV. The alterations of text in excel resulted in "Bus Error: 10" otherwise. This manually cleaned dataset was then input into the subsequent function loop.
 
 
 
@@ -134,69 +118,12 @@ def df_split(infile):
 	df7.to_csv("../df7.csv", encoding='utf-8', header=0)
 	df8.to_csv("../df8.csv", encoding='utf-8', header=0)
 	df9.to_csv("../df9.csv", encoding='utf-8', header=0)
-	#df10.to_csv("../df10.csv", encoding='utf-8', header=0)
 
 	print "All files written."
 
+#Unhash to run
 df_split("../IW_DATA.csv")
-#df_split("../IW_DATA_test.csv")
-#df_split("../cleaned_contacts2_new.csv")
 
-#This might need to be added before the header step
-#Add headers to python in Excel
-#
-
-
-def clean_contacts3(df):
-	"""This function takes a CSV of existing scholars CSV text files and department
-	and converts it to a cleaned CSV of departments and scholar names."""
-
-	#Set Infile/Outfile Names
-	infile = "../"+str(df)+".csv"
-	outfile = "../pandas_"+str(df)+".csv"
-
-	#Define Data
-	data = pd.read_csv(infile, index_col=0, header=None)
-	#infile = open(CSV, 'rU')
-	#outfile = open('../cleaned_contacts.csv', 'w')
-
-	transdf = data.transpose()
-
-	#Used originally
-	#transdf.to_csv("../pandas_clean_new.csv", encoding='utf-8')
-	#transdf.to_csv("../pandas_df1.csv", encoding='utf-8')
-	transdf.to_csv(outfile, encoding='utf-8')
-
-
-#clean_contacts3("../cleaned_contacts2-head_new.csv")
-#clean_contacts3("../df1.csv")
-
-##clean_contacts3("df1")
-
-
-def convert_trans_df(infile):
-
-	#Define Data
-	data = pd.read_csv(infile, delimiter='|')
-	#infile = open(CSV, 'rU')
-	#outfile = open('../cleaned_contacts.csv', 'w')
-
-	# data
-	transdf = data.transpose()
-	#print transdf
-
-	#Used originally
-	#transdf.to_csv("../pandas_One_Name_Per_Row_new.csv", encoding='utf-8')
-	transdf.to_csv("../pandas_df1_One_Name_Per_Row.csv", encoding='utf-8')
-
-
-#convert_trans_df("../pandas_clean_new.csv")
-##convert_trans_df("../pandas_df1.csv")
-
-##So even this way, I seem to be getting about 1/5 of the rows. There should be 10,000 not 2,000 or 1,000.
-
-## I might have to break up the CSV prior to the transpose into say 5-10 smaller spreadsheets.
-## 
 
 def transpose_delimiter(df):
 
@@ -205,7 +132,6 @@ def transpose_delimiter(df):
 	outfile_1st = "../pandas_"+str(df)+".csv"
 
 	infile_2nd = outfile_1st
-	#outfile_2nd = "../pandas_"+str(df)+"_One_Name_Per_Row.csv"
 	outfile_2nd = "../NPR_"+str(df)+".csv"
 
 	###_____ First Step ____ ###
@@ -225,10 +151,8 @@ def transpose_delimiter(df):
 	transdf.to_csv(outfile_2nd, encoding='utf-8')
 
 
-#transpose_delimiter("df2")
 
 # Run Transpose Delimiter For All Sub-DF's
-
 def gen_names_per_row():
 	
 	dfs = ['df1', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9']
@@ -236,7 +160,9 @@ def gen_names_per_row():
 		print "Writing names for "+df+"..."
 		transpose_delimiter(df)
 
+#Unhash to run
 gen_names_per_row()
+
 
 def merge_files():
 	#path = "../NPR"
@@ -252,7 +178,7 @@ def merge_files():
 	print "Writing merged file..."
 	frame.to_csv("../MERGED_NPR.csv", encoding='utf-8')
 
-
+#Unhash to run
 merge_files()
 
 
@@ -277,5 +203,6 @@ def post_merge_clean(file_):
 	infile.close()
 	outfile.close()
 
+#Unhash to run
 post_merge_clean("MERGED_NPR")
 
