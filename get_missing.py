@@ -34,4 +34,4 @@ def phone_number_scrubber(file_):
 	outfile.close()
 
 #Unhash to run
-post_merge_clean("__faculty")
+phone_number_scrubber("__faculty")
