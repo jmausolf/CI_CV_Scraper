@@ -33,7 +33,7 @@ def phone_number_scrubber(file_):
 			line2 = result.replace(" () -", '')
 
 			# Replace Degrees Such as Dr. or MD
-			line3 = line2.replace('Dr.', '').replace('MD', '').replace('M.D.', '').replace('Ph.d.', '').replace('PhD', '').replace('J.D.', '').replace('JD', '')
+			line3 = line2.replace('Dr.', '').replace('MD', '').replace('M.D.', '').replace('Md', '').replace('Ph.d.', '').replace('Ph.D.', '').replace('PhD', '').replace('J.D.', '').replace('JD', '').replace('FACS', '')
 			writer.writerow([result])
 
 	infile.close()
@@ -54,14 +54,17 @@ def post_phone_sweep(file_):
 	print "Cleaning post-phone cleaned file..."
 	for line in reader:
 			line0 = str(line)
-			line1 = line0.replace(',', ' ').replace(';', ' ').replace("['", '').replace("']", '')
+			line1 = line0.replace(',', ' ').replace(';', ' ').replace("['", '').replace("']", '').replace('''"[""''', '').replace('''""]"''', '').replace("\\\\\\\'", "'").replace("\\\\'", "'").replace("\\", '')
+			#D\\\\\\\'Agaro""]"
 			# Replace Parentheses
 			#line2 = result.replace('(XXX)', '').replace('XXX-XXXX', '')
-			line2 = line1.replace("() -", '')
+			line2 = line1.replace("() -", '').replace("...", '').replace(" . ", '')
 
 			# Replace Degrees Such as Dr. or MD
-			line3 = line2.replace('Dr.', '').replace('MD', '').replace('M.D.', '').replace('Ph.d.', '').replace('PhD', '').replace('J.D.', '').replace('JD', '')
-			writer.writerow([line3])
+			line3 = line2.replace('Dr.', '').replace('MD', '').replace('M.D.', '').replace('Md', '').replace('Ph.d.', '').replace('Ph.D.', '').replace('PhD', '').replace('J.D.', '').replace('JD', '').replace('FACS', '')
+			# Replace Double/Triple Spacing
+			line4 = line3.replace('    ', ' ').replace('  ', ' ').replace("  ", ' ')
+			writer.writerow([line4])
 
 	infile.close()
 	outfile.close()
