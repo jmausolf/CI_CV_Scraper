@@ -55,8 +55,6 @@ def phone_number_scrubber(file_):
 	infile.close()
 	outfile.close()
 
-#Unhash to run
-#phone_number_scrubber("MERGED_Faculty_Deans_Provosts")
 
 
 def post_phone_sweep(file_, outfile_):
@@ -89,16 +87,22 @@ def post_phone_sweep(file_, outfile_):
 	infile.close()
 	outfile.close()
 
-#Unhash to run
-#post_phone_sweep("__faculty_Phone_Removed_Cleaned")
 
 
-
+################################################
+# GENERATE CLEANED MASTER LIST
+################################################
 File_To_Clean = "MERGED_Faculty_Deans_Provosts"
 Scrubbed_File = File_To_Clean+"_Phone_Scrubbed"
 
 phone_number_scrubber(File_To_Clean)
 post_phone_sweep(Scrubbed_File, "Faculty_Deans_Provosts")
+
+
+
+def get_missing(master_list, other_list):
+
+
 
 
 
