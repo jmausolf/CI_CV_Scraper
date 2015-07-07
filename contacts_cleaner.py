@@ -131,7 +131,7 @@ def transpose_delimiter(df):
 	then imports the df using a delimiter inputed during the
 	initial data cleaning. Lastly, it transposes the df back
 	to the original form."""
-	
+
 	#Set Infile/Outfile Names
 	infile_1st = "../"+str(df)+".csv"
 	outfile_1st = "../pandas_"+str(df)+".csv"
@@ -153,7 +153,7 @@ def transpose_delimiter(df):
 	#Import Transposed Data and Use Deliter to Split
 	data = pd.read_csv(infile_2nd, delimiter='|')
 	transdf = data.transpose()
-	transdf.to_csv(outfile_2nd, encoding='utf-8')
+	transdf.to_csv(outfile_2nd, encoding='utf-8', header=False)
 
 
 
@@ -171,21 +171,26 @@ def gen_names_per_row():
 gen_names_per_row()
 
 
-def merge_files():
-	allFiles = ["../NPR_df1.csv", "../NPR_df2.csv", "../NPR_df3.csv", "../NPR_df4.csv", "../NPR_df5.csv", "../NPR_df6.csv", "../NPR_df7.csv", "../NPR_df8.csv", "../NPR_df9.csv"]
+
+def merge_files(args, filename):
+
+	#Unwrap arguments
+	argument_list = args
 
 	frame = pd.DataFrame()
 	list_ = []
-	for file_ in allFiles:
+
+	#Loop over variable arguments
+	for file_ in argument_list:
 	    df = pd.read_csv(file_,index_col=0, header=None)
 	    list_.append(df)
 	frame = pd.concat(list_)
-	print "Writing merged file..."
-	frame.to_csv("../MERGED_NPR.csv", encoding='utf-8')
+	write_file = "../MERGED_"+str(filename)+".csv"
+	print "Writing merged file... ", write_file
+	frame.to_csv(write_file, encoding='utf-8', header=False)
 
 #Unhash to run
-merge_files()
-
+merge_files(["../NPR_df1.csv", "../NPR_df2.csv", "../NPR_df3.csv", "../NPR_df4.csv", "../NPR_df5.csv", "../NPR_df6.csv", "../NPR_df7.csv", "../NPR_df8.csv", "../NPR_df9.csv"], "NPR")
 
 
 def post_merge_clean(file_):
