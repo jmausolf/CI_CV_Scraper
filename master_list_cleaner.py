@@ -74,11 +74,11 @@ def post_phone_sweep(file_, outfile_):
 	print "Cleaning post-phone cleaned file..."
 	for line in reader:
 			line0 = str(line)
-			line1 = line0.replace(',', ' ').replace(';', ' ').replace("['", '').replace("']", '').replace('''"[""''', '').replace('''""]"''', '').replace("\\\\\\\'", "'").replace("\\\\'", "'").replace("\\", '').replace('"""', '"').replace('""', '"')
+			line1 = line0.replace(',', ' ').replace(';', ' ').replace("['", '').replace("']", '').replace('''"[""''', '').replace('''""]"''', '').replace("\\\\\\\'", "'").replace("\\\\'", "'").replace("\\", '').replace('"""', '"').replace('""', '"').replace('["', '').replace('"]', '').replace('[', '').replace(']', '')
 			line2 = line1.replace("() -", '').replace("...", '').replace(" . ", '')
 
 			# Replace Degrees Such as Dr. or MD
-			line3 = line2.replace('Dr.', '').replace('MD', '').replace('M.D.', '').replace('Md', '').replace('Ph.d.', '').replace('Ph.D.', '').replace('PhD', '').replace('J.D.', '').replace('JD', '').replace('FACS', '')
+			line3 = line2.replace('Dr.', '').replace('MD', '').replace('M.D.', '').replace('Md', '').replace('Ph.d.', '').replace('Ph.D.', '').replace('PhD', '').replace('J.D.', '').replace('JD', '').replace('FACS', '').replace(' . ', '')
 			# Replace Double/Triple Spacing
 			line4 = line3.replace('    ', ' ').replace('  ', ' ').replace("  ", ' ')
 			writer.writerow([line4])
@@ -95,15 +95,37 @@ def post_phone_sweep(file_, outfile_):
 File_To_Clean = "MERGED_Faculty_Deans_Provosts"
 Scrubbed_File = File_To_Clean+"_Phone_Scrubbed"
 
-phone_number_scrubber(File_To_Clean)
-post_phone_sweep(Scrubbed_File, "Faculty_Deans_Provosts")
+#phone_number_scrubber(File_To_Clean)
+#post_phone_sweep(Scrubbed_File, "Faculty_Deans_Provosts")
+
+################################################
+
+def master_name_extract(file_):
 
 
+	filename = "../"+file_+".csv"
+	infile = open(filename, 'rU')
+	outfile = open("../__NAMES_"+file_+"_.csv", 'w')	
 
-def get_missing(master_list, other_list):
+	reader = csv.reader(infile)
+	writer = csv.writer(outfile)
+
+	print "Cleaning merged file..."
+	for line in reader:
+			line0 = str(line)
+			line1 = line0.replace(',', ' ').replace(';', ' ').replace("['", '').replace("']", '')
+			#names = re.compile("/\b([A-Z]{1}[a-z]{1,30}[- ]{0,1}|[A-Z]{1}[- \']{1}[A-Z]{0,1} [a-z]{1,30}[- ]{0,1}|[a-z]{1,2}[ -\']{1}[A-Z]{1}[a-z]{1,30}){2,5}/")
+
+			#result = names.sub(lambda m: re.sub('/\b', '*', m.group(1)), line1)
+			result = line1.split(' ', 3)
+
+			writer.writerow([result])
+
+	infile.close()
+	outfile.close()
 
 
-
-
+#Unhash to run
+master_name_extract("__CLEANED_Faculty_Deans_Provosts_")
 
 
