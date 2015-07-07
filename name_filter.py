@@ -42,15 +42,6 @@ def name_filter():
 				with open('../__faculty.csv','a') as f1: f1.write("{}\n".format(row[0]))
 
 
-			#Filter Deans and Provosts
-			elif 'Dean' in row[0]:
-				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
-			elif 'Provost' in row[0]:
-				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
-			elif 'President' in row[0]:
-				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
-
-
 			#Filter Admin
 			elif 'Admin' in row[0]:
 				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
@@ -58,6 +49,63 @@ def name_filter():
 				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
 			elif 'Administrative' in row[0]:
 				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Executive Asst' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Executive Assistant' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Asst to' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Assistant to' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Secretary' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Executive Sec' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Specialist' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Special Assistant' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Advisor' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Registrar' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Programmer' in row[0]:
+				with open('../__admin.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+
+			# Filter 'Associate/Asst Deans/Provosts/Directors'
+			elif 'Assistant Dean' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Assistant Provost' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Assistant Director' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Associate Dean' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Associate Provost' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Associate Director' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Deputy Dean' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Deputy Provost' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Deputy Director' in row[0]:
+				with open('../__other_deans.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+
+
+
+			#Filter Deans and Provosts
+			elif 'Dean' in row[0]:
+				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+			elif 'Provost' in row[0]:
+				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+
+
+			#Filter Presidents
+			elif 'President' in row[0]:
+				with open('../__presidents.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
+
+
 
 
 			#Filter Students
