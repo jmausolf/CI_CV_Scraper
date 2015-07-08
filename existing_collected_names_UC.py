@@ -46,7 +46,7 @@ def writeExistingNames(infile):
 	outfile.close()
 
 #Unhash to test
-#writeExistingNames(CSV)
+writeExistingNames(CSV)
 
 
 def Get_Names_Only(infile):
