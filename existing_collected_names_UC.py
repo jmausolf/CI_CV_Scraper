@@ -25,7 +25,7 @@ def read_CSV(i, CSV):
 
 
 def writeExistingNames(infile):
-	"""This function takes a CSV of existing scholars CSV text files and department
+	"""This function takes a CSV of existing scholars CSV text files and department 
 	and converts it to a cleaned CSV of departments and scholar names."""
 
 	infile = open(CSV, 'rU')
@@ -36,7 +36,7 @@ def writeExistingNames(infile):
 
 	for line in reader:
 			line0 = str(line)
-			line1 = line0.replace('_', ' ').replace('.txt', '')
+			line1 = line0.replace('_', ' ').replace('.txt', '').replace('.docx', '').replace('.doc', '').replace('.pdf', '')
 			#print line1
 			line2 = line1.replace('[', '').replace(']', '').replace("'", '')
 			#print line2
@@ -45,7 +45,33 @@ def writeExistingNames(infile):
 	infile.close()
 	outfile.close()
 
-writeExistingNames(CSV)
+#Unhash to test
+#writeExistingNames(CSV)
+
+
+def Get_Names_Only(infile):
+	"""This function takes a CSV of existing scholars CSV text files and department 
+	and converts it to a cleaned CSV of only scholar names."""
+
+
+	infile = open(CSV, 'rU')
+	outfile = open('../Only_Existing_UC_Names.csv', 'w')
+
+	reader = csv.reader(infile, delimiter=',')
+	writer = csv.writer(outfile, delimiter=',')
+
+	for line in reader:
+			line0 = str(line)
+			line1 = line0.replace('_', ' ').replace('.txt', '').replace('.docx', '').replace('.doc', '').replace('.pdf', '')
+			line2 = line1.replace('[', '').replace(']', '').replace("'", '')
+			line3 = line2.split(',')[1]
+			writer.writerow([line3])
+
+	infile.close()
+	outfile.close()
+
+#Unhash to test
+Get_Names_Only(CSV)
 
 
 
