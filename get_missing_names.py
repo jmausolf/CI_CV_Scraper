@@ -15,9 +15,7 @@ def missing_filter(_file):
      with open('../'+_file+'.csv', 'rU') as f:
           for row in csv.reader(f):
 
-               #Filter Professors
-
-
+               #Filter Professors, Deans, and Provosts
                if 'Alan' in row[0] and 'Kolata' in row[0]:
                     with open('../__MATCHED.csv','a') as f1: f1.write("{}\n".format(row[0]))
                elif 'Alice' in row[0] and 'Yao' in row[0]:
@@ -1067,23 +1065,15 @@ def missing_filter(_file):
 
 
 
-                              #Filter Everthing Else
+               #Filter Everthing Else
                else:
                     with open('../__MISSING.csv', 'a') as f2: f2.write("{}\n".format(row[0]))
 
 #Unhash to run
-#missing_filter("__NAMES___CLEANED_Faculty_Deans_Provosts__")
-#missing_filter("__CLEANED_Faculty_Deans_Provosts_")
-#missing_filter("__MASTER_Faculty_Deans_Provosts_")
+#To Get the Original List of Missing and Matched Files, Run 
 
+missing_filter("__CLEANED_Faculty_Deans_Provosts_")
 
-
-# To Get the Original List of Missing and Matched Files, Run 
-
-#missing_filter("__CLEANED_Faculty_Deans_Provosts_")
-
-# To Get the List of Those Not Matched (from the Cross List) but Not Missing
-
-missing_filter("CLEANED__MATCHED")
+# NOTE: There are some individuals who are on the original list of CV's we have but who are not "Matched" to those on the CLEANED_Faculty_Deans_Provosts CSV. 
 
 
