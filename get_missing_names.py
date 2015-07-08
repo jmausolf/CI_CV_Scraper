@@ -1073,5 +1073,17 @@ def missing_filter(_file):
 
 #Unhash to run
 #missing_filter("__NAMES___CLEANED_Faculty_Deans_Provosts__")
-missing_filter("__CLEANED_Faculty_Deans_Provosts_")
+#missing_filter("__CLEANED_Faculty_Deans_Provosts_")
+#missing_filter("__MASTER_Faculty_Deans_Provosts_")
+
+
+
+# To Get the Original List of Missing and Matched Files, Run 
+
+#missing_filter("__CLEANED_Faculty_Deans_Provosts_")
+
+# To Get the List of Those Not Matched (from the Cross List) but Not Missing
+
+missing_filter("CLEANED__MATCHED")
+
 
