@@ -18,7 +18,7 @@ def missing_filter_writer(crosslist_file):
 	existing_names_reader = csv.reader(existing_names_infile, delimiter=',')
 
 	#Generate Match Command String From Filter as a Var
-	match_command0 = """     with open('../__MATCHED.csv','a') as f1: f1.write("{}'"""+"""\+"""+"""n".format(row[0]))"""
+	match_command0 = """     with open('../__MATCHED.csv','a') as f1: f1.write("{}"""+"""\+"""+"""n".format(row[0]))"""
 	match_command = str(match_command0).replace('+', '')
 
 	#print match_command3
@@ -31,7 +31,7 @@ def missing_filter_writer(crosslist_file):
 
 		if len(line2)==5:
 			#print line2[1], line2[2], line2[3], line2[4]
-			print "if '"+line2[1]+"' and '"+line2[2]+"' and '"+line2[3]+"' and '"+line2[4]+"' in row[0]:"
+			print "elif '"+line2[1]+"' in row[0] and '"+line2[2]+"'in row[0] and '"+line2[3]+"' in row[0] and '"+line2[4]+"' in row[0]:"
 			print (match_command)
 			#command1 = search_term1+'\n'+match_command
 			#print command1
@@ -41,12 +41,12 @@ def missing_filter_writer(crosslist_file):
 		elif len(line2)==4:
 			commands2 = []
 			#print line2[1], line2[2], line2[3]
-			print "if '"+line2[1]+"' and '"+line2[2]+"' and '"+line2[3]+"' in row[0]:"
+			print "elif '"+line2[1]+"' in row[0] and '"+line2[2]+"' in row[0] and '"+line2[3]+"' in row[0]:"
 			print (match_command)
 		
 		elif len(line2)==3:
 			#print line2[1], line2[2]
-			print "if '"+line2[1]+"' and '"+line2[2]+"' in row[0]:"
+			print "elif '"+line2[1]+"' in row[0] and '"+line2[2]+"' in row[0]:"
 			print (match_command)
 		else:
 			print "WARNING: MISSING DATA"*3
