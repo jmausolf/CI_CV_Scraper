@@ -14,20 +14,22 @@ def department_filter():
 
 	import csv 
 
-	with open('../EDITED__CLEANED_CVs__MISSING.csv', 'rU') as f:
+	with open('../EDITED__CLEANED_CVs__MISSING1.csv', 'rU') as f:
 		for row in csv.reader(f):
+
 
 			### DEANS AND PROVOSTS
 			if 'Dean' in row[1]:
-				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row))
+				with open('../__DEPT_Deans_Provosts.csv', 'a') as f2: f2.write("{}\n".format(row))
 			elif 'Provost' in row[1]:
-				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row))
+				with open('../__DEPT_Deans_Provosts.csv', 'a') as f2: f2.write("{}\n".format(row))
 
 
 			#### SOCIAL SCIENCE
 			#Filter Sociology
 			elif 'Sociology' in row[1]:
 				with open('../__DEPT_Sociology.csv', 'a') as f2: f2.write("{}\n".format(row))
+
 
 			#Filter Anthropology
 			elif 'Anthropology' in row[1]:
@@ -101,7 +103,9 @@ def department_filter():
 
 			#Filter Near Eastern Lang
 			elif 'Eastern' in row[1]:
-				with open('../__DEPT_Eastern.csv', 'a') as f2: f2.write("{}\n".format(row))
+				with open('../__DEPT_East_Asian.csv', 'a') as f2: f2.write("{}\n".format(row))
+			elif 'East Asian' in row[1]:
+				with open('../__DEPT_East_Asian.csv', 'a') as f2: f2.write("{}\n".format(row))	
 
 			#Filter Romance
 			elif 'Romance' in row[1]:
@@ -123,8 +127,8 @@ def department_filter():
 				with open('../__DEPT_Slavic.csv', 'a') as f2: f2.write("{}\n".format(row))
 
 			#Filter South Asian Languages and Civilizations
-			elif 'Asian' in row[1]:
-				with open('../__DEPT_Asian.csv', 'a') as f2: f2.write("{}\n".format(row))
+			elif 'Asian' in row[1] and 'South' in row[1]:
+				with open('../__DEPT_South_Asian.csv', 'a') as f2: f2.write("{}\n".format(row))
 
 
 			#### NATURAL AND BIOLOGICAL SCIENCES
