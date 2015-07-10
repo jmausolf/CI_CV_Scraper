@@ -57,12 +57,13 @@ def tester(file_):
 	print "Cleaning merged file..."
 	for line in reader:
 			line0 = str(line)
-			line1 = line0.replace(';', ' ').replace("['", '').replace("']", '').replace('["', '').replace('"]', '').replace("'", '')
+			line1 = line0.replace(';', ' ').replace("['", '').replace("']", '').replace('["', '').replace('"]', '').replace("'", '').replace(' ', '', 1)
 			
 			line2 = line1.lower()
+			line2 = line1.title()
 			print line2
 			#writer.writerow([line1])
-			#writer.writerow([line2])
+			writer.writerow([line2])
 
 	infile.close()
 	outfile.close()
@@ -71,7 +72,7 @@ def tester(file_):
 #Unhash to run
 #tester("EDIT__CLEANED_CVs__MISSING")
 #tester("Bowen_Names")
-#tester("Only_Existing_UC_Names")
+tester("Only_Existing_UC_Names")
 #tester("EDITED__CLEANED_CVs__MISSING")
 #tester("EDITED__CLEANED_CVs__MISSING")
 
