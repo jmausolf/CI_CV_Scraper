@@ -17,8 +17,19 @@ def name_filter():
 	with open('../MERGED_NPR_Cleaned.csv', 'rU') as f:
 		for row in csv.reader(f):
 
+			#Filter Fellows and Research Associates
+			if 'Fellow ' in row[0] and not 'Postdoctoral' in row[0] and not 'Doctoral' in row[0] and not 'Doc.' in row[0] and not 'Post' in row[0]:
+				with open('../__fellows_associates.csv','a') as f1: f1.write("{}\n".format(row[0]))
+			elif 'RES ASSOC (ASST PROF)' in row[0]:
+				with open('../__fellows_associates.csv','a') as f1: f1.write("{}\n".format(row[0]))
+			elif 'Senior Research Associate' in row[0]:
+				with open('../__fellows_associates.csv','a') as f1: f1.write("{}\n".format(row[0]))
+
+
+
+
 			#Filter Professors
-			if 'Professor' in row[0]:
+			elif 'Professor' in row[0]:
 				with open('../__faculty.csv','a') as f1: f1.write("{}\n".format(row[0]))
 			elif 'Prof.' in row[0]:
 				with open('../__faculty.csv','a') as f1: f1.write("{}\n".format(row[0]))
