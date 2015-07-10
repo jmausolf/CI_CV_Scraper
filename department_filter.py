@@ -17,9 +17,16 @@ def department_filter():
 	with open('../EDITED__CLEANED_CVs__MISSING.csv', 'rU') as f:
 		for row in csv.reader(f):
 
+			### DEANS AND PROVOSTS
+			if 'Dean' in row[1]:
+				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row))
+			elif 'Provost' in row[1]:
+				with open('../__deans_provosts.csv', 'a') as f2: f2.write("{}\n".format(row))
+
+
 			#### SOCIAL SCIENCE
 			#Filter Sociology
-			if 'Sociology' in row[1]:
+			elif 'Sociology' in row[1]:
 				with open('../__DEPT_Sociology.csv', 'a') as f2: f2.write("{}\n".format(row))
 
 			#Filter Anthropology
@@ -33,6 +40,7 @@ def department_filter():
 			#Filter Econ
 			elif 'Economics' in row[1]:
 				with open('../__DEPT_Economics.csv', 'a') as f2: f2.write("{}\n".format(row))
+
 
 			#Filter History
 			elif 'History' in row[1]:
@@ -52,7 +60,6 @@ def department_filter():
 
 
 			#### HUMANITIES
-
 
 			#Filter Art History
 			elif 'Art' in row[1] and 'History' in row[1]:
@@ -92,6 +99,10 @@ def department_filter():
 			elif 'Music' in row[1]:
 				with open('../__DEPT_Music.csv', 'a') as f2: f2.write("{}\n".format(row))
 
+			#Filter Near Eastern Lang
+			elif 'Eastern' in row[1]:
+				with open('../__DEPT_Eastern.csv', 'a') as f2: f2.write("{}\n".format(row))
+
 			#Filter Romance
 			elif 'Romance' in row[1]:
 				with open('../__DEPT_Romance.csv', 'a') as f2: f2.write("{}\n".format(row))
@@ -107,7 +118,13 @@ def department_filter():
 				with open('../__DEPT_Philosophy.csv', 'a') as f2: f2.write("{}\n".format(row))
 
 
+			#Filter Slavid
+			elif 'Slavic' in row[1]:
+				with open('../__DEPT_Slavic.csv', 'a') as f2: f2.write("{}\n".format(row))
 
+			#Filter South Asian Languages and Civilizations
+			elif 'Asian' in row[1]:
+				with open('../__DEPT_Asian.csv', 'a') as f2: f2.write("{}\n".format(row))
 
 
 			#### NATURAL AND BIOLOGICAL SCIENCES
@@ -115,6 +132,12 @@ def department_filter():
 			#Biology
 			elif 'Biology' in row[1]:
 				with open('../__DEPT_Biology.csv','a') as f1: f1.write("{}\n".format(row))
+
+			#Ecology and Evolution
+			elif 'Ecology' in row[1]:
+				with open('../__DEPT_Ecology.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'Evolution' in row[1]:
+				with open('../__DEPT_Ecology.csv','a') as f1: f1.write("{}\n".format(row))
 
 			#Neuroscience
 			elif 'Neurobiology' in row[1]:
@@ -159,6 +182,11 @@ def department_filter():
 				with open('../__DEPT_Astronomy.csv','a') as f1: f1.write("{}\n".format(row))
 	
 
+			### PHYSICAL EDUCATION
+			elif 'Henry' in row[1] and 'Field' in row[1]:
+				with open('../__DEPT_Physical_Education.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'Ratner' in row[1]:
+				with open('../__DEPT_Physical_Education.csv','a') as f1: f1.write("{}\n".format(row))
 
 			### PROFESSIONAL SCHOOLS
 
@@ -177,7 +205,13 @@ def department_filter():
 			#Filter Harris School
 			elif 'Harris' in row[1] and 'School' in row[1]:
 				with open('../__DEPT_Harris.csv', 'a') as f2: f2.write("{}\n".format(row))
-	
+			elif 'Public' in row[1] and 'Policy' in row[1]:
+				with open('../__DEPT_Harris.csv', 'a') as f2: f2.write("{}\n".format(row))
+
+			#Filter Divinity
+			elif 'Divinity' in row[1]:
+				with open('../__DEPT_Divinity.csv', 'a') as f2: f2.write("{}\n".format(row))
+
 			#Filter Public Health
 			elif 'Public' in row[1] and 'Health' in row[1]:
 				with open('../__DEPT_Health.csv', 'a') as f2: f2.write("{}\n".format(row))
@@ -185,6 +219,13 @@ def department_filter():
 				with open('../__DEPT_Health.csv', 'a') as f2: f2.write("{}\n".format(row))
 			elif 'Health' in row[1]:
 				with open('../__DEPT_Health.csv', 'a') as f2: f2.write("{}\n".format(row))
+
+			#Argonne National Lab / Fermi
+			elif 'anl.' in row[1]:
+				with open('../__DEPT_Argonne_Fermi.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'Fermi' in row[1]:
+				with open('../__DEPT_Argonne_Fermi.csv','a') as f1: f1.write("{}\n".format(row))
+
 
 			#Medicine and Hospital
 			elif 'uchospital' in row[1]:
@@ -213,7 +254,16 @@ def department_filter():
 				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
 			elif 'MC' in row[1]:
 				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
-
+			elif 'Clinical' in row[1]:
+				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'Oncology' in row[1]:
+				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'Biological' in row[1]:
+				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'MRIS' in row[1]:
+				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
+			elif 'Ophthalmology' in row[1]:
+				with open('../__DEPT_Medicine_BSD.csv','a') as f1: f1.write("{}\n".format(row))
 
 			#Filter Everthing Else
 			else:
