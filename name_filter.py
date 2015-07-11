@@ -24,7 +24,8 @@ def name_filter():
 				with open('../__fellows_associates.csv','a') as f1: f1.write("{}\n".format(row[0]))
 			elif 'Senior Research Associate' in row[0]:
 				with open('../__fellows_associates.csv','a') as f1: f1.write("{}\n".format(row[0]))
-
+			elif 'Senior Research Associate' in row[0]:
+				with open('../__fellows_associates.csv','a') as f1: f1.write("{}\n".format(row[0]))
 
 
 
