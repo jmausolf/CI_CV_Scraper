@@ -8,7 +8,8 @@
 
 
 def missing_filter(_file):
-     """This filter sorts a CSV."""
+     """This filter was created using the missing_filter_writer.py
+     It sorts a list of CVs using the following string to id matches."""
 
      import csv 
 
